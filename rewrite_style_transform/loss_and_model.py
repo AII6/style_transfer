@@ -29,7 +29,7 @@ def imageProcess(path):
 def Grim_Maxtrix(input):
     s = input.shape
     a, b, c, d = s[0], s[1], s[2], s[3]  # a为图片数，b为通道数，c和d分别为宽高
-    F = input.resize(b, c * d)  # 先算F
+    F = input.squeeze(0).view(b, c * d)  # 先算F
     G = torch.mm(F, F.T)  # 再算外积(叉乘)
     return torch.div(G, 2 * b * c * d)
 
